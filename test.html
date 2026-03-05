@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="public/1.jpg" alt="background" />
+</body>
+
+<!-- {
+  "sorry": [0.097, 0.147, 0.051, 0.018],
+  "hurry up": [0.097, 0.170, 0.134, 0.018],
+  "late": [0.097, 0.210, 0.042, 0.018],
+  "class": [0.097, 0.232, 0.051, 0.018],
+  "ready": [0.097, 0.272, 0.051, 0.018],
+  "rule": [0.097, 0.294, 0.042, 0.018],
+  "classroom": [0.097, 0.316, 0.097, 0.018],
+  "turn off": [0.097, 0.338, 0.120, 0.018],
+  "light": [0.097, 0.359, 0.046, 0.018],
+  "blackboard": [0.097, 0.380, 0.106, 0.018],
+  "desk": [0.097, 0.402, 0.046, 0.018],
+  "chair": [0.097, 0.423, 0.046, 0.018],
+  "tidy": [0.097, 0.445, 0.042, 0.018],
+  "music": [0.097, 0.485, 0.056, 0.018],
+  "door": [0.097, 0.507, 0.046, 0.018],
+  "window": [0.097, 0.528, 0.074, 0.018],
+  "fan": [0.097, 0.550, 0.032, 0.018],
+  "when": [0.097, 0.571, 0.051, 0.018],
+  "understand": [0.097, 0.611, 0.106, 0.018],
+  "wall": [0.097, 0.650, 0.042, 0.018],
+  "newspaper": [0.097, 0.672, 0.097, 0.018],
+  "hand out": [0.491, 0.123, 0.088, 0.018],
+  "workbook": [0.491, 0.145, 0.093, 0.018]
+} -->
+<script>
+    const versionName = 'renjiao-4-2-1';
+    const img = document.querySelector('img');
+    img.src = `./public/${versionName}/1.jpg`;
+
+    function drawWord(data, color) {
+
+        function drawRect(itemData, word) {
+            const div = document.createElement("div");
+            //add border
+            div.style.border = `1px solid ${color}`;
+            div.textContent = word;
+            div.style.position = "absolute";
+            div.style.top = `${itemData[1]}px`;
+            div.style.left = `${itemData[0]}px`;
+            div.style.width = `${itemData[2]}px`;
+            div.style.height = `${itemData[3]}px`;
+            document.body.appendChild(div);
+        }
+        for (const word in data) {
+            const itemData = data[word];
+            // if (itemData[0][0] !== undefined) {
+            // if itemData is 2d array
+            if (Array.isArray(itemData[0])) {
+                for (const item of itemData) {
+                    drawRect(item, word);
+                }
+            } else {
+                drawRect(itemData, word);
+            }
+        }
+    }
+
+    async function main() {
+        const data = await fetch(`./public/${versionName}/wordPosition.json`).then(res => res.json());
+
+        const lineHeight = 40.5;
+        const origX = 115;
+        const origY = 294;
+        const imageWidth = img.width;
+        const imageHeight = img.height;
+
+        const lineCount = {
+            'hurry up': 2,
+            'class': 2,
+            'tidy': 2,
+            'when': 2,
+            'understand': 2,
+            'newspaper': 2,
+            'wordbook': 2,
+        }
+
+        const wordsOffsetX = {
+            'hand out': 490,
+            'workbook': 490,
+        }
+
+        const wordsOffsetY = {
+            'hand out': -1150,
+            'workbook': -1150,
+        }
+
+        const wordsWidth = {
+            "sorry": 162,
+            "hurry up": 325,
+            "late": 133,
+            "class": 162,
+            "ready": 162,
+            "rule": 133,
+            "classroom": 307,
+            "turn off": 250,
+            "light": 146,
+            "blackboard": 296,
+            "desk": 166,
+            "chair": 186,
+            "tidy": 153,
+            "music": 207,
+            "door": 176,
+            "window": 245,
+            "fan": 131,
+            "when": 162,
+            "understand": 326,
+            "wall": 145,
+            "newspaper": 337,
+            "hand out": 189,
+            "workbook": 265
+        }
+
+        function getNextLineRect(wordData, word, width) {
+            return [wordData[word][0], wordData[word][1] + wordData[word][3], width, wordData[word][3]]
+        }
+        // for (const word in data) {
+        //     wordsWidth[word] = Math.round(data[word][2] * imageWidth * 2.8);
+        // }
+        // console.log(JSON.stringify(wordsWidth, null, 2));
+
+
+        console.log(data)
+        // const width = data.width;
+        width = 380;
+        let previousY = origY
+        console.log(imageWidth, imageHeight)
+
+        let wordData = {}
+        let transData = {}
+        // for each words, create a div with the word as text content
+        // and set the position to absolute
+        // and set the top, left, width, height to the values in the data
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            const word = Object.keys(data)[i];
+            const itemData2 = data[word];
+            // const itemData = [itemData2[0] * imageWidth, itemData2[1] * imageHeight, itemData2[2] * imageWidth, itemData2[3] * imageHeight];
+            const currentY = previousY;
+            const itemData = [origX + (wordsOffsetX[word] ?? 0), currentY + (wordsOffsetY[word] ?? 0), wordsWidth[word], lineHeight];
+            previousY = currentY + (lineCount[word] ?? 1) * lineHeight
+            // console.log(itemData)
+            wordData[word] = itemData
+            transData[word] = [itemData[0] + itemData[2] + 5, itemData[1], width - itemData[2], itemData[3]]
+            // const div = document.createElement("div");
+            // //add border
+            // div.style.border = "1px solid black";
+            // div.textContent = word;
+            // div.style.position = "absolute";
+            // div.style.top = `${itemData[1]}px`;
+            // div.style.left = `${itemData[0]}px`;
+            // div.style.width = `${itemData[2]}px`;
+            // div.style.height = `${itemData[3]}px`;
+            // document.body.appendChild(div);
+
+            // const div2 = document.createElement("div");
+            // //add border
+            // div2.style.border = "1px solid red";
+            // div2.textContent = word;
+            // div2.style.position = "absolute";
+            // div2.style.top = `${itemData[1]}px`;
+            // div2.style.left = `${itemData[0] + itemData[2] + 5}px `;
+            // div2.style.width = `${width - itemData[2]}px`;
+            // div2.style.height = `${itemData[3]}px`;
+            // document.body.appendChild(div2);
+        }
+        // console.log(JSON.stringify(wordData, null, 2))
+        let d = transData['hurry up']
+        // transData['hurry up'] = [wordData['hurry up'][0], d[1] + lineHeight, wordData['hurry up'][2], d[3]];
+        transData['hurry up'] = getNextLineRect(wordData, 'hurry up', width);
+        d = transData['class']
+        transData['class'] = [d, getNextLineRect(wordData, 'class', width)];
+        d = transData['tidy']
+        transData['tidy'] = [d, getNextLineRect(wordData, 'tidy', width)];
+        d = transData['when']
+        transData['when'] = [d, getNextLineRect(wordData, 'when', width)];
+        d = transData['understand']
+        transData['understand'] = [d, getNextLineRect(wordData, 'understand', width)];
+        d = transData['newspaper']
+        transData['newspaper'] = getNextLineRect(wordData, 'newspaper', width);
+        d = transData['workbook']
+        transData['workbook'] = [d, getNextLineRect(wordData, 'workbook', width)];
+
+
+        console.log(JSON.stringify({
+            wordData,
+            transData,
+        }))
+
+        
+
+        drawWord(wordData, 'black')
+        drawWord(transData, 'red')
+    }
+    // load json from './renjiao-3-2/wordPosition.json'
+    main();
+
+</script>
+
+</html>

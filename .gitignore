@@ -5,3 +5,15 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+public
+
+# Editor and tooling
+.vscode/
+
+# Local cursor skills (generated)
+.cursor/
+
+# Logs
+*.log
+*.mp4
