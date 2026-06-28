@@ -15,9 +15,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const wordsCount = 20;
-const unitNumber = 11;
+const unitNumber = 22;
 const fromIndex = 0;
-const toIndex = Math.floor(113 / wordsCount);
+const toIndex = Math.floor(52 / wordsCount);
 
 
 

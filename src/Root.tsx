@@ -5,6 +5,7 @@ import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { BackgroundImage, getDuration } from "./BackgroundImage";
 import WordHighlighter from "./WordHighlighter";
 import WordHighlighter2 from "./WordHighlighter2";
+import { TextbookFlashlight } from "./TextbookFlashlight";
 import WordHighlighterRandom from "./WordHighlighterRandom";
 import FlashCardScene from "./FlashCardScene";
 import { calculateMetadata } from "@remotion/media-utils";
@@ -22,7 +23,7 @@ export const RemotionRoot: React.FC = () => {
   const foldername = '01-00';
   const wordsCount = 20;
   const metaDataPath = `/flashcards/${foldername}/`
-  const [audioDuration, setAudioDuration] = useState(150);
+  const [audioDuration, setAudioDuration] = useState(146);
   const [metaData, setMetaData] = useState<any>({});
 
   useEffect(() => {
@@ -56,13 +57,31 @@ export const RemotionRoot: React.FC = () => {
           data: [],
           audioUrl: staticFile(metaDataPath + "audio.mp3"),
         }}
-        // calculateMetadata={async ({ props }) => {
-        //   const { durationInSeconds } = await getMediaMetadata(props.src);
+      // calculateMetadata={async ({ props }) => {
+      //   const { durationInSeconds } = await getMediaMetadata(props.src);
 
-        //   return {
-        //     durationInFrames: Math.floor(durationInSeconds * 30),
-        //   };
-        // }}
+      //   return {
+      //     durationInFrames: Math.floor(durationInSeconds * 30),
+      //   };
+      // }}
+      />
+      <Composition
+        // You can take the "id" to render a video:
+        // npx remotion render HelloWorld
+        id="TextbookFlashlight"
+        component={TextbookFlashlight}
+        durationInFrames={77 * 30 + 120}
+        fps={30}
+        width={1080}
+        height={1440}
+        // You can override these props for each render:
+        // https://www.remotion.dev/docs/parametrized-rendering
+        schema={myCompSchema}
+        defaultProps={{
+          version: 'yilin-2024',
+          grade: '3-1',
+          unit: '1',
+        }}
       />
       <Composition
         // You can take the "id" to render a video:

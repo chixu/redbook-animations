@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="" alt="background" />
+</body>
+<script>
+  const versionName = 'renjiao2-2024';
+  const gradeName = '6-1';
+  const unit = '1';
+  const wordsPath = `${versionName}_${gradeName}_${unit}`;
+  const img = document.querySelector('img');
+  img.src = `./${wordsPath}.jpg`;
+
+  function drawWord(data, color) {
+
+    function drawRect(itemData, word) {
+      const div = document.createElement("div");
+      //add border
+      div.style.border = `1px solid ${color}`;
+      div.textContent = word;
+      div.style.position = "absolute";
+      div.style.top = `${itemData[1]}px`;
+      div.style.left = `${itemData[0]}px`;
+      div.style.width = `${itemData[2]}px`;
+      div.style.height = `${itemData[3]}px`;
+      document.body.appendChild(div);
+    }
+    for (const word in data) {
+      const itemData = data[word];
+      // if (itemData[0][0] !== undefined) {
+      // if itemData is 2d array
+      if (Array.isArray(itemData[0])) {
+        for (const item of itemData) {
+          drawRect(item, word);
+        }
+      } else {
+        drawRect(itemData, word);
+      }
+    }
+  }
+
+  async function main() {
+    const data = await fetch(`./${wordsPath}.txt`).then(res => res.text());
+    const words = data.split('\n').filter(line => line.trim() !== '');
+    console.log(words)
+
+    let lineHeight = 57;
+    const lineWidth = 620;
+    const origX = 126;
+    const origY = 326;
+    const imageWidth = img.width;
+    const imageHeight = img.height;
+
+    const lineCount = {
+      'was': 2,
+      'kilometre': 2,
+      'gingerbread house': 2,
+      'go': 2,
+      'see': 2,
+      'take': 3,
+      'inspiring': 2,
+      'restaurant': 2,
+      'New Zealand': 2,
+      'Hong Kong-Zhuhai-Macao Bridge': 3,
+      'Terracotta Warriors': 2,
+      'Jinggangshan Revolution Museum': 3,
+    }
+    const wordLineCount = {
+      'gingerbread house': 2,
+      "Terracotta Warriors": 2,
+      'Hong Kong-Zhuhai-Macao Bridge': 2,
+      'Jinggangshan Revolution Museum': 2,
+    }
+    const yOffsets = {
+      airport: 52,
+      "New Zealand": 48,
+      // "Paris": -6,
+      // 'Jinggangshan Revolution Museum': -4,
+      // "the Red Army": -10,
+    }
+    const lineHeights = {
+      airport: 55,
+    }
+    const xOffsets = {
+      "was": 50,
+      "climb": 5,
+      "kilometre": 0,
+      "gingerbread house": 125,
+      "send": 26,
+      "go": 66,
+      "thousand": -30,
+      "clay": 0,
+      "see": 20,
+      "village": -60,
+      "eat": 10,
+      "dry": 40,
+      "take": 10,
+      "view": 10,
+      "inspiring": 0,
+      "bamboo": 30,
+      "pumpkin": 30,
+      "restaurant": 0,
+      "airport": -48,
+      "New Zealand": 0,
+      "Hong Kong-Zhuhai-Macao Bridge": 0,
+      "Paris": 0,
+      "Eiffel Tower": -250,
+      "Terracotta Warriors": 170,
+      "Jinggangshan Revolution Museum": 0,
+      "the Red Army": 0,
+    }
+
+    function getNextLineRect(wordData, word, width) {
+      return [wordData[word][0], wordData[word][1] + wordData[word][3], width, wordData[word][3]]
+    }
+    const wordsWidth = {}
+    for (const word of words) {
+      wordsWidth[word] = Math.round(word.length * 50);
+    }
+    // console.log(JSON.stringify(wordsWidth, null, 2));
+
+
+    console.log(data)
+    // const width = data.width;
+    width = 380;
+    let previousY = origY
+    let yOffset = 0;
+    console.log(imageWidth, imageHeight)
+
+    let wordData = {}
+    let transData = {}
+    // for each words, create a div with the word as text content
+    // and set the position to absolute
+    // and set the top, left, width, height to the values in the data
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      if(lineHeights[word]){
+        lineHeight = lineHeights[word]
+      }
+      const nextWord = words[i + 1];
+      // const itemData2 = data[word];
+      // const itemData = [itemData2[0] * imageWidth, itemData2[1] * imageHeight, itemData2[2] * imageWidth, itemData2[3] * imageHeight];
+      const currentY = previousY;
+      let itemData = [origX, currentY, wordsWidth[word] + (xOffsets[word] ?? 0), lineHeight];
+      if (wordLineCount[word] > 1) {
+        itemData = []
+        if (xOffsets[word]) {
+          const w = lineHeight * (wordLineCount[word] - 1)
+          itemData.push([origX, currentY, lineWidth, w])
+          itemData.push([origX, currentY + w, xOffsets[word], lineHeight])
+        } else {
+          itemData = [origX, currentY, lineWidth, lineHeight * wordLineCount[word]]
+        }
+      }
+      previousY = currentY + (lineCount[word] ?? 1) * lineHeight + (yOffsets[nextWord] ?? 0);
+      transData[word] = [origX, currentY, lineWidth, previousY - currentY]
+      // console.log(itemData)
+      wordData[word] = itemData
+    }
+    drawWord(wordData, 'black')
+    drawWord(transData, 'red')
+  }
+  // load json from './renjiao-3-2/wordPosition.json'
+  main();
+
+</script>
+
+</html>

@@ -1,7 +1,6 @@
 import { AbsoluteFill, useVideoConfig, staticFile, Audio } from "remotion";
 import { calculateMetadata } from "@remotion/media-utils";
 import WordHighlighter from "./WordHighlighter";
-import { unit1 } from "./data/unit1";
 
 // Calculate audio duration to set video length
 export const getDuration = async () => {
@@ -17,7 +16,7 @@ export const BackgroundImage: React.FC = () => {
       <WordHighlighter
         imageSrc={staticFile("1.jpg")}
         audioSrc={staticFile("Unit 1.mp3")}
-        words={unit1}
+        // words={unit1}
         highlightDuration={0.6}
       />
     </AbsoluteFill>

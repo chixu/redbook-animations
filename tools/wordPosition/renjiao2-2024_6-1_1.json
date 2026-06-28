@@ -1,0 +1,346 @@
+{
+  "wordData": {
+    "was": [
+      126,
+      326,
+      200,
+      57
+    ],
+    "climb": [
+      126,
+      440,
+      255,
+      57
+    ],
+    "kilometre": [
+      126,
+      497,
+      450,
+      57
+    ],
+    "gingerbread house": [
+      126,
+      611,
+      620,
+      114
+    ],
+    "send": [
+      126,
+      725,
+      226,
+      57
+    ],
+    "go": [
+      126,
+      782,
+      166,
+      57
+    ],
+    "thousand": [
+      126,
+      896,
+      370,
+      57
+    ],
+    "clay": [
+      126,
+      953,
+      200,
+      57
+    ],
+    "see": [
+      126,
+      1010,
+      170,
+      57
+    ],
+    "village": [
+      126,
+      1124,
+      290,
+      57
+    ],
+    "eat": [
+      126,
+      1181,
+      160,
+      57
+    ],
+    "dry": [
+      126,
+      1238,
+      190,
+      57
+    ],
+    "take": [
+      126,
+      1295,
+      210,
+      57
+    ],
+    "view": [
+      126,
+      1466,
+      210,
+      57
+    ],
+    "inspiring": [
+      126,
+      1523,
+      450,
+      57
+    ],
+    "bamboo": [
+      126,
+      1637,
+      330,
+      57
+    ],
+    "pumpkin": [
+      126,
+      1694,
+      380,
+      57
+    ],
+    "restaurant": [
+      126,
+      1751,
+      500,
+      57
+    ],
+    "airport": [
+      126,
+      1917,
+      302,
+      55
+    ],
+    "New Zealand": [
+      126,
+      2020,
+      550,
+      55
+    ],
+    "Hong Kong-Zhuhai-Macao Bridge": [
+      126,
+      2130,
+      620,
+      110
+    ],
+    "Paris": [
+      126,
+      2295,
+      250,
+      55
+    ],
+    "Eiffel Tower": [
+      126,
+      2350,
+      350,
+      55
+    ],
+    "Terracotta Warriors": [
+      126,
+      2405,
+      620,
+      110
+    ],
+    "Jinggangshan Revolution Museum": [
+      126,
+      2515,
+      620,
+      110
+    ],
+    "the Red Army": [
+      126,
+      2680,
+      600,
+      55
+    ]
+  },
+  "transData": {
+    "was": [
+      126,
+      326,
+      620,
+      114
+    ],
+    "climb": [
+      126,
+      440,
+      620,
+      57
+    ],
+    "kilometre": [
+      126,
+      497,
+      620,
+      114
+    ],
+    "gingerbread house": [
+      126,
+      611,
+      620,
+      114
+    ],
+    "send": [
+      126,
+      725,
+      620,
+      57
+    ],
+    "go": [
+      126,
+      782,
+      620,
+      114
+    ],
+    "thousand": [
+      126,
+      896,
+      620,
+      57
+    ],
+    "clay": [
+      126,
+      953,
+      620,
+      57
+    ],
+    "see": [
+      126,
+      1010,
+      620,
+      114
+    ],
+    "village": [
+      126,
+      1124,
+      620,
+      57
+    ],
+    "eat": [
+      126,
+      1181,
+      620,
+      57
+    ],
+    "dry": [
+      126,
+      1238,
+      620,
+      57
+    ],
+    "take": [
+      126,
+      1295,
+      620,
+      171
+    ],
+    "view": [
+      126,
+      1466,
+      620,
+      57
+    ],
+    "inspiring": [
+      126,
+      1523,
+      620,
+      114
+    ],
+    "bamboo": [
+      126,
+      1637,
+      620,
+      57
+    ],
+    "pumpkin": [
+      126,
+      1694,
+      620,
+      57
+    ],
+    "restaurant": [
+      126,
+      1751,
+      620,
+      166
+    ],
+    "airport": [
+      126,
+      1917,
+      620,
+      103
+    ],
+    "New Zealand": [
+      126,
+      2020,
+      620,
+      110
+    ],
+    "Hong Kong-Zhuhai-Macao Bridge": [
+      126,
+      2130,
+      620,
+      165
+    ],
+    "Paris": [
+      126,
+      2295,
+      620,
+      55
+    ],
+    "Eiffel Tower": [
+      126,
+      2350,
+      620,
+      55
+    ],
+    "Terracotta Warriors": [
+      126,
+      2405,
+      620,
+      110
+    ],
+    "Jinggangshan Revolution Museum": [
+      126,
+      2515,
+      620,
+      165
+    ],
+    "the Red Army": [
+      126,
+      2680,
+      620,
+      55
+    ]
+  },
+  "words": [
+    "was",
+    "climb",
+    "kilometre",
+    "gingerbread house",
+    "send",
+    "go",
+    "thousand",
+    "clay",
+    "see",
+    "village",
+    "eat",
+    "dry",
+    "take",
+    "view",
+    "inspiring",
+    "bamboo",
+    "pumpkin",
+    "restaurant",
+    "airport",
+    "New Zealand",
+    "Hong Kong-Zhuhai-Macao Bridge",
+    "Paris",
+    "Eiffel Tower",
+    "Terracotta Warriors",
+    "Jinggangshan Revolution Museum",
+    "the Red Army"
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="" alt="background" />
+</body>
+<script>
+  const versionName = 'yilin-2024';
+  const gradeName = '3-1';
+  const unit = '1';
+  const wordsPath = `${versionName}_${gradeName}_${unit}`;
+  const img = document.querySelector('img');
+  img.src = `../../public/textbookFlashlight/${wordsPath}.jpg`;
+
+  function drawWord(data, color) {
+
+    function drawRect(itemData, word) {
+      const div = document.createElement("div");
+      //add border
+      div.style.border = `1px solid ${color}`;
+      div.textContent = word;
+      div.style.position = "absolute";
+      div.style.top = `${itemData[1]}px`;
+      div.style.left = `${itemData[0]}px`;
+      div.style.width = `${itemData[2]}px`;
+      div.style.height = `${itemData[3]}px`;
+      document.body.appendChild(div);
+    }
+    for (const word in data) {
+      const itemData = data[word];
+      // if (itemData[0][0] !== undefined) {
+      // if itemData is 2d array
+      if (Array.isArray(itemData[0])) {
+        for (const item of itemData) {
+          drawRect(item, word);
+        }
+      } else {
+        drawRect(itemData, word);
+      }
+    }
+  }
+
+  async function main() {
+    const data = await fetch(`../../public/textbookFlashlight/${wordsPath}.json`).then(res => res.json());
+    const words = data.words;
+    const { wordData, transData } = data;
+    console.log(words)
+    const imageWidth = img.width;
+    const imageHeight = img.height;
+
+    drawWord(wordData, 'black')
+    drawWord(transData, 'red')
+  }
+  // load json from './renjiao-3-2/wordPosition.json'
+  main();
+
+</script>
+
+</html>

@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.c-char {
+    color: #004aad;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.v-char {
+    color: #f50057;
+    font-weight: bold;
+    font-family: Arial;
+}

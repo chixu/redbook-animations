@@ -11,6 +11,7 @@
     "@ffprobe-installer/ffprobe": "^2.1.2",
     "@remotion/bundler": "4.0.410",
     "@remotion/cli": "4.0.410",
+    "@remotion/media": "^4.0.482",
     "@remotion/renderer": "4.0.410",
     "@remotion/tailwind-v4": "4.0.410",
     "@remotion/zod-types": "4.0.410",
